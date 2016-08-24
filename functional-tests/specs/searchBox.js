@@ -17,4 +17,14 @@ describe('searchBox', () => {
 
     it('triggers a new search', () => expect(browser.getText('#hits')).toContain('MP3'));
   });
+
+  context('using the back button', () => {
+    beforeEach(() => {
+      searchBox.set('hello');
+      browser.url('https://www.google.fr');
+      browser.back();
+    });
+
+    it('keeps the input value', () => expect(searchBox.get()).toBe('hello'));
+  });
 });
